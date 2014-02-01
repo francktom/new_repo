@@ -7,6 +7,7 @@ import socket, sys
 
 HOST = '127.0.0.1'
 PORT = 50000
+BUFFER_SIZE = 1024
 
 # 1) création du socket :
 mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -20,7 +21,7 @@ except socket.error:
 print "Connexion établie avec le serveur."    
 
 # 3) Dialogue avec le serveur :
-msgServeur = mySocket.recv(1024)
+msgServeur = mySocket.recv(BUFFER_SIZE)
 
 while 1:
     if msgServeur.upper() == "FIN" or msgServeur =="":
@@ -28,7 +29,7 @@ while 1:
     print "S>", msgServeur
     msgClient = raw_input("C> ")
     mySocket.send(msgClient)
-    msgServeur = mySocket.recv(1024)
+    msgServeur = mySocket.recv(BUFFER_SIZE)
 
 # 4) Fermeture de la connexion :
 print "Connexion interrompue."
